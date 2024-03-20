@@ -29,7 +29,10 @@ module spike_around_ball(ball_outer_radius,spike_bottom_radius,spike_hight)
                 translate([-pos_x,0,pos_z])
                 {
                     rotate([0,layer_angle*layer_idx+180,0]) 
-                        single_spike(spike_hight,spike_bottom_radius);
+                        if(pos_z<0)
+                        {
+                            single_spike(spike_hight,spike_bottom_radius);
+                        }
                 }
             }
         }
@@ -38,4 +41,22 @@ module spike_around_ball(ball_outer_radius,spike_bottom_radius,spike_hight)
 //    translate([0,0,ball_outer_radius]) 
         sphere(ball_outer_radius);
 
+}
+/*
+手柄的半径，至少是尖刺高度加上圆球半径
+手柄的高度，计算：
+内部旋转球的半径，应该比ball_hollow_radius稍小一点，不然转不动
+*/
+module joint_inside(ball_hollow_radius,ball_outer_radius,spike_hight)
+{
+    sphere(ball_hollow_radius);
+    handle_hight=spike_hight+ball_outer_radius;
+    cylinder_radius=tan((180/54*9))*handle_hight;
+    echo(handle_hight);
+    cylinder(handle_hight,cylinder_radius,cylinder_radius);
+}
+
+module joint_cover(r)
+{
+    sphere(r);
 }
