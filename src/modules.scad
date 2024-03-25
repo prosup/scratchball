@@ -29,7 +29,8 @@ module spike_around_ball(ball_outer_radius,spike_bottom_radius,spike_hight)
                 translate([-pos_x,0,pos_z])
                 {
                     rotate([0,layer_angle*layer_idx+180,0]) 
-                        if(pos_z<0)
+                        //低于这个高度才上刺，多了没用
+                        if(pos_z<-ball_outer_radius*0.7)
                         {
                             single_spike(spike_hight,spike_bottom_radius);
                         }
@@ -51,12 +52,17 @@ module joint_inside(ball_hollow_radius,ball_outer_radius,spike_hight)
 {
     sphere(ball_hollow_radius);
     handle_hight=spike_hight+ball_outer_radius;
-    cylinder_radius=tan((180/54*9))*handle_hight;
+    cylinder_radius=sin((180/54*7))*handle_hight;
     echo(handle_hight);
     cylinder(handle_hight,cylinder_radius,cylinder_radius);
 }
 
-module joint_cover(r)
+module joint_cover(ball_hollow_radius,ball_outer_radius,spike_hight)
 {
-    sphere(r);
+    joint_inside(ball_hollow_radius = ball_hollow_radius, ball_outer_radius = ball_outer_radius, spike_hight = spike_hight);
+    difference() 
+    {
+        sphere(spike_hight+ball_outer_radius+2.5);
+        sphere(spike_hight+ball_outer_radius+1);
+    }
 }
