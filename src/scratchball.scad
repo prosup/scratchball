@@ -16,8 +16,8 @@ ball_hollow_radius=20;
 //挖槽的宽度
 slot_width=2;
 //
-spike_bottom_radius=1.2;
-spike_hight=5;
+spike_bottom_radius=0.7;
+spike_hight=1;
 
 difference()
 { 
