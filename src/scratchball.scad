@@ -1,3 +1,6 @@
+
+
+
 //坐标系变换
 use <util-func.scad>
 use <modules.scad>
@@ -16,8 +19,8 @@ ball_hollow_radius=20;
 //挖槽的宽度
 slot_width=2;
 //
-spike_bottom_radius=1.2;
-spike_hight=5;
+spike_bottom_radius=0.8;
+spike_hight=2;
 
 difference()
 { 

@@ -9,7 +9,7 @@ module spike_around_ball(ball_outer_radius,spike_bottom_radius,spike_hight)
 //calculate how may layer should we have
 //caculate layer ring R from the angle
     hight=ball_outer_radius*cos(asin(spike_bottom_radius/ball_outer_radius));//高度是定值
-    layer_max=54;
+    layer_max=100;
     layer_angle=180/layer_max;
     for(layer_idx=[1:2:layer_max])
     {
