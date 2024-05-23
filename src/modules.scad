@@ -30,7 +30,7 @@ module spike_around_ball(ball_outer_radius,spike_bottom_radius,spike_hight)
                 {
                     rotate([0,layer_angle*layer_idx+180,0]) 
                         //低于这个高度才上刺，多了没用
-                        if(pos_z<-ball_outer_radius*0.7)
+                        if(pos_z<-ball_outer_radius*0.8)
                         {
                             single_spike(spike_hight,spike_bottom_radius);
                         }
