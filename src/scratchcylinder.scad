@@ -2,10 +2,15 @@ use <modules.scad>
 use <util-func.scad>
 
 $fn=100;
+
 spike_hight = 3;
+roller_r=10;
+//外壳要比滚轮大
+shell_inner_radius=pow((spike_hight+roller_r),2)+pow(roller_r,2);
+shell_thick=1.5;
+
 spike_bottom_radius = 1.2;
 roller_l=20*(sin(60)*spike_bottom_radius*2)+2*spike_bottom_radius;
-roller_r=10;
 joint_hight=spike_bottom_radius*2;
 joint_radius=5;
 layer=20;
