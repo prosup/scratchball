@@ -5,11 +5,11 @@ $fn=100;
 
 spike_hight = 3;
 roller_r=10;
-//外壳要比滚轮大
-shell_inner_radius=pow((spike_hight+roller_r),2)+pow(roller_r,2);
+//外壳要比滚轮大，露出垂直方向完整的齿
 shell_thick=1.5;
 
 spike_bottom_radius = 1.2;
+shell_inner_radius=roller_r+spike_hight;
 roller_l=20*(sin(60)*spike_bottom_radius*2)+2*spike_bottom_radius;
 joint_hight=spike_bottom_radius*2;
 joint_radius=5;
@@ -19,15 +19,23 @@ layer=20;
 //    echo(num);
 //
 
-
-
+//shell 
+difference() {
+difference() {
+   cylinder(roller_l+2*joint_hight, shell_inner_radius+shell_thick,shell_inner_radius+shell_thick);
+   cylinder(roller_l+2*joint_hight, shell_inner_radius,shell_inner_radius);
+}
+translate([0,spike_hight+roller_r,roller_l/2+joint_hight]) 
+    cube([shell_inner_radius*2,spike_hight*2,roller_l+2*joint_hight],true);
+}
 //cylinder(roller_l, roller_r,roller_r);
 //translate([0,0,spike_bottom_radius]) 
 //    sigle_spike_ring();
+
 joint(joint_radius, joint_hight);
 translate([0,0,roller_l+2*spike_bottom_radius]) 
     joint(joint_radius, joint_hight);
 translate([0,0,2*spike_bottom_radius]) 
 cylinder(roller_l, roller_r,roller_r);
 translate([0,0,2*spike_bottom_radius]) 
-piller_of_spike(layer,roller_r,spike_hight,spike_bottom_radius);
+piller_of_spike(layer,roller_r,spike_hight,spike_bottom_radius); 
