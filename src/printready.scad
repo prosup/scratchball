@@ -1,23 +1,32 @@
 use <scratchcylinder.scad>
-cube_x=50;
+cube_x = 50;
 
 module left_roller()
 {
-difference() {
-    roller();
-    translate([0,cube_x/2,cube_x/2-1]) 
-        cube([cube_x,cube_x,cube_x],true);
+    difference()
+    {
+
+        difference()
+        {
+            roller();
+            translate([ 0, cube_x / 2, cube_x / 2 - 1 ]) cube([ cube_x, cube_x, cube_x ], true);
+        }
+        latch();
     }
 }
 
 module right_roller()
 {
-difference() {
-    roller();
-    translate([0,-cube_x/2,cube_x/2-1]) 
-        cube([cube_x,cube_x,cube_x],true);
+    difference()
+    {
+        difference()
+        {
+            roller();
+            translate([ 0, -cube_x / 2, cube_x / 2 - 1 ]) cube([ cube_x, cube_x, cube_x ], true);
+        }
+        latch();
     }
 }
-
-left_roller();
-//right_roller();
+// left_roller();
+right_roller();
+latch();
