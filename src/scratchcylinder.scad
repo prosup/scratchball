@@ -9,8 +9,8 @@ roller_r = 10;
 shell_thick = 1.5;
 
 spike_bottom_radius = 1.2;
-shell_inner_radius = roller_r + spike_hight + 0.3;
-shell_outer_radius = roller_r + spike_hight + shell_thick + 0.3;
+shell_inner_radius = roller_r + spike_hight + 1.2;
+shell_outer_radius = roller_r + spike_hight + shell_thick + 1.2;
 roller_l = 20 * (sin(60) * spike_bottom_radius * 2) + 2 * spike_bottom_radius;
 joint_hight = spike_bottom_radius * 2;
 joint_radius = 5;
@@ -85,7 +85,7 @@ module socked_shell()
         difference()
         {
             half_round_shell();
-            translate([ 0, 0, 0.4 ]) joint(joint_radius + 0.2, joint_hight * 2 + roller_l - 0.8);
+            translate([ 0, 0, -0.4 ]) joint(joint_radius + 0.3, joint_hight * 2 + roller_l + 0.8);
         };
         union()
         {
@@ -104,14 +104,18 @@ module socked_shell()
 
 module roller()
 {
+    difference() 
+    {
     union()
     {
         // joint(joint_radius, joint_hight);
         // translate([0,0,roller_l+2*spike_bottom_radius])
         //     joint(joint_radius, joint_hight);
-        translate([ 0, 0, 0.5 ]) joint(joint_radius, (joint_hight - 0.5) * 2 + roller_l);
+//        translate([ 0, 0, 0.5 ]) joint(joint_radius, (joint_hight - 0.5) * 2 + roller_l);
         translate([ 0, 0, 2 * spike_bottom_radius ]) cylinder(roller_l, roller_r, roller_r);
         translate([ 0, 0, 2 * spike_bottom_radius ]) piller_of_spike(layer, roller_r, spike_hight, spike_bottom_radius);
+    }
+    joint(joint_radius, (joint_hight - 0.5) * 2 + roller_l);
     }
 }
 
@@ -126,3 +130,18 @@ module latch()
 // slide();
 
 // latch();
+
+module full_length_joint() {
+    joint(joint_radius, (joint_hight - 0.5) * 3 + roller_l);
+}
+
+module top_hat()
+{
+    joint(joint_radius+2,1);
+    difference() {
+    joint(joint_radius+0.2, 4);
+    joint(joint_radius-0.4, 5);
+    }
+}
+
+top_hat();

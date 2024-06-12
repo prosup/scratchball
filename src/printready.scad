@@ -27,6 +27,20 @@ module right_roller()
         latch();
     }
 }
-// left_roller();
-right_roller();
-latch();
+//left_roller();
+
+//translate([50,0,0])
+//right_roller();
+// translate([100,0,0])
+// {
+//     scale([0.98,0.98,0.98]) 
+//         latch();
+// }
+//translate([150,0,0]) 
+socked_shell();
+
+//translate([200,0,0]) 
+//half_round_shell();
+roller();
+
+full_length_joint();
