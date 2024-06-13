@@ -29,18 +29,21 @@ module round_shell()
         {
             translate([ 0, 0, 0.1 ])
             {
-                cylinder(roller_l + 2 * (joint_hight - 0.1), shell_inner_radius + shell_thick,
-                         shell_inner_radius + shell_thick);
+                cylinder(roller_l + 2 * (joint_hight - 0.1), shell_inner_radius + shell_thick+0.4,
+                         shell_inner_radius + shell_thick+0.4);
             }
             translate([ 0, 0, (joint_hight) / 2 ])
                 cylinder(roller_l + joint_hight, shell_inner_radius, shell_inner_radius);
         }
 
-        translate([ 0, spike_hight + roller_r, roller_l / 2 + joint_hight ])
-            cube([ shell_inner_radius * 2, spike_hight * 2, roller_l + 2 * joint_hight + 2 ], true);
-    }
+        translate([ 0, roller_r+spike_hight, roller_l / 2 + joint_hight ])
+            {
+            cube([ shell_inner_radius * 2, spike_hight * 3, roller_l + 2 * joint_hight + 2 ], true);
+            cube([ shell_outer_radius * 4, roller_l/2, roller_l + 2   ], true);
+            }
+    };
+            
 }
-
 module half_round_shell()
 {
     // difference()
@@ -98,6 +101,29 @@ module socked_shell()
         }
     }
 }
+
+
+module socked_round_shell()
+{
+    difference()
+    {
+        difference()
+        {
+            round_shell();
+            translate([ 0, 0, -0.4 ]) joint(joint_radius + 0.3, joint_hight * 2 + roller_l + 0.8);
+        };
+        union()
+        {
+            // bottom slide
+            slide();
+            translate([ 0, 0, roller_l + 2 * joint_hight ])
+            {
+                rotate([ 0, 180, 0 ]) slide();
+            }
+        }
+    }
+}
+
 // cylinder(roller_l, roller_r,roller_r);
 // translate([0,0,spike_bottom_radius])
 //     sigle_spike_ring();
@@ -139,9 +165,10 @@ module top_hat()
 {
     joint(joint_radius+2,1);
     difference() {
-    joint(joint_radius+0.2, 4);
-    joint(joint_radius-0.4, 5);
+    joint(joint_radius+0.2, 3);
+    joint(joint_radius-0.4, 4);
     }
 }
 
-top_hat();
+//top_hat();
+socked_round_shell();
